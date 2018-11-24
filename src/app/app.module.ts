@@ -11,6 +11,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { Web3Service } from './app.service';
+import { ParticlesModule } from 'angular-particle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { Web3Service } from './app.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ParticlesModule
   ],
   providers: [Web3Service],
   bootstrap: [AppComponent]

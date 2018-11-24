@@ -29,10 +29,10 @@ export class CarComponent implements OnInit {
   async setCar() {
     this.accounts = await this.webSerice.getAccounts();
     console.log(this.accounts[0])
-    var a = await this.contract.methods.getcar('1').send({
-      from: this.accounts[0]
-    });
-    console.log(a);
+    // var a = await this.contract.methods.getcar('1').send({
+    //   from: this.accounts[0]
+    // });
+    // console.log(a);
   }
 
   async getAccounts() {
