@@ -28,16 +28,15 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     }
-    console.log('logging in')
     this.auth.login(data).subscribe((res: any) => {
       this.router.navigate(['/car'])
       this.loader = false;
-      this.toast.toastSuccess('Sucess', 'Welcome to VINBO')
+      this.toast.toastSuccess('Welcome to VINBO', 'Sucessfully logged in')
       localStorage.setItem('user', JSON.stringify(res));
     }, err => {
       this.loader = false;
       let errM = JSON.parse(err._body).message || 'Some error occured';
-      this.toast.toastError('error', errM)
+      this.toast.toastError(errM, 'error')
     })
   }
 
