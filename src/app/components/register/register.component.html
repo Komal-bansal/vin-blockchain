@@ -1,62 +1,34 @@
-<style>
-  img{
-  /* margin: 20px auto; */
-  display: block;
-  /* height: 200px; */
-  width: 200px;
-  border-style: solid;
-  border-radius: 100%;
-}
-.abc.particles-container{
-  background: red
-}
-</style>
-<particles class="abc" [params]="myParams" [style]="myStyle" [width]="width" [height]="height"></particles>
-
-
-
-<div class="container" style="
-  position: fixed;
-  top: 33%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
-">
-
+<div class="container">
   <form class="form-horizontal" style="background:#6d6e7359;padding: 10px">
     <div style="text-align: center;
       font-size: 61px;">REGISTER</div>
-    <div class="image-container row">
-      <div style="margin:auto"><img class="image" src="https://www.w3schools.com/howto/img_avatar2.png" class="image"></div>
-
-    </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="name">Name:</label>
+      <label class="control-label " for="name">Name:</label>
       <div class="col-sm-12">
-        <input type="text" class="form-control" id="name" placeholder="Enter name" name="Name">
+        <input type="text" class="form-control" [(ngModel)]="name" id="name" placeholder="Enter name" name="Name">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="email">Email:</label>
+      <label class="control-label " for="email">Email:</label>
       <div class="col-sm-12">
-        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+        <input type="text" class="form-control" id="email" [(ngModel)]="email" placeholder="Enter email" name="email">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="Phone">Phone:</label>
+      <label class="control-label " for="Phone">Phone:</label>
       <div class="col-sm-12">
-        <input type="text" class="form-control" id="Phone" placeholder="Enter Contact Number" name="phone">
+        <input type="text" class="form-control" id="Phone" [(ngModel)]="phoneNo" placeholder="Enter Contact Number"
+          name="phone">
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <label class="control-label " for="pwd">Password:</label>
       <div class="col-sm-12">
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+        <input type="password" class="form-control" id="pwd" [(ngModel)]="password" placeholder="Enter password" name="pwd">
       </div>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-secondary " (click)="login()">Submit</button>
+      <button type="submit" class="btn btn-secondary " (click)="register()">Submit</button>
     </div>
   </form>
 </div>

@@ -1,0 +1,42 @@
+@import 'variables';
+
+form{
+    color: white !important;
+    font-family:monospace;
+}
+
+.container{
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 50%;
+}
+
+form {
+    background: #f5af41eb !important
+}
+
+.center{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.form-control{
+    background: #8e8779 !important;
+    height: 51px;
+    border-radius: 14px;
+    border: none;
+    padding: 0px 20px 20px 20px;
+}
+.custom-form{
+    margin: 0px 7%
+}
+
+.padding-1{
+    padding-bottom: 1rem
+}
+.margin-1{
+    margin-bottom: 1rem;
+}

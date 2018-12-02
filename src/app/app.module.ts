@@ -11,7 +11,14 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { Web3Service } from './app.service';
-import { ParticlesModule } from 'angular-particle';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { ConstantsService } from './app.constants';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastService } from './toast.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,15 +27,19 @@ import { ParticlesModule } from 'angular-particle';
     CarComponent,
     OwnerComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ParticlesModule
+    FormsModule,
+    HttpModule,
+    RouterModule,
+    ToastrModule.forRoot(),
+    AngularFontAwesomeModule
   ],
-  providers: [Web3Service],
+  providers: [Web3Service, AuthService, ConstantsService, ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

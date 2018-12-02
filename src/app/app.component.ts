@@ -11,4 +11,5 @@ export class AppComponent {
   constructor() {
     this.Web3 = new web3(web3.currentProvider);
   }
+
 }
