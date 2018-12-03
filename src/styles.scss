@@ -1,19 +1,26 @@
 @import 'variables';
-
+@import '~alertifyjs/build/css/alertify.min.css';
+@import '~alertifyjs/build/css/themes/default.min.css';
 form{
     color: white !important;
     font-family:monospace;
 }
 
-.container{
-    position: absolute;
-    top: 43%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: 50%;
-}
-
+// .container{
+//     position: absolute;
+//     top: 43%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     width: 40%;
+//     height: 50%;
+// }
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+  }
 form {
     background: #f5af41eb !important
 }
@@ -55,3 +62,33 @@ input::placeholder {
     font-size: 50px;
     font-weight: 900;
 }
+
+.main-container{
+    height: 100vh;
+}
+// Toast styles
+.alertify-notifier .ajs-message.ajs-success{
+    background:rgba(0, 0, 0, 0.80);
+    border: 0px;
+  }
+
+
+//alertify modal style
+.alertify .ajs-header{
+    background: $primary-color !important;
+    color: white !important;
+    box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.16);
+    border-bottom: 0px;
+  }
+  
+  .alertify .ajs-footer {
+    background: white; 
+    border-top: 0px; 
+  }
+  .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok{
+      color: white !important;
+      background: $primary-color;
+      border: none 
+  }
+  
+  

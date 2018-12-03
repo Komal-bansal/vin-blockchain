@@ -1,0 +1,12 @@
+.main-container{
+    background-image: url("../../../assets/setCar.png") !important;
+}
+
+.link{
+    color:blue !important;
+}
+
+.link:hover{
+    color: red !important
+} 
+

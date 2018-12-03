@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/car'])
       this.loader = false;
       this.toast.toastSuccess('Welcome to VINBO', 'Sucessfully logged in')
-      localStorage.setItem('user', JSON.stringify(res));
+      localStorage.setItem('user', JSON.stringify(res.result));
+      console.log(res);
+      localStorage.setItem('token', res.token)
     }, err => {
       this.loader = false;
       let errM = JSON.parse(err._body).message || 'Some error occured';

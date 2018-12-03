@@ -1,15 +1,4 @@
-<div class="row">
-  <form>
-    <div class="form-group">
-      <label class="control-label " for="no">Number:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" [(ngModel)]="getNumber" id="no" placeholder="Enter  Car Number" name="no">
-      </div>
-      <button type="submit" class="btn btn-secondary " (click)="getD()" data-toggle="modal" data-target="#myModal">Submit</button>
-    </div>
-  </form>
-</div>
-<div class="container">
+<!-- <div class="container">
 
   <form class="form-horizontal" style="background:#6d6e7359;padding: 10px">
     <div style="text-align: center;
@@ -50,50 +39,61 @@
   </form>
 </div>
 
-​
-<!-- <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Car Details</h4>
+​ -->
+<div class="main-container vertical-center">
+  <div class="container offset-md-3 col-md-6 col-sm-12">
+    <form class="form-horizontal" (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
+      <div class="heading">Set owner details</div>
+      <div class="image-container row margin-1">
+        <div class="center"><img src="../../../assets/log- in Pop-up line.png"></div>
       </div>
-      <div class="modal-body">
-        Car Number: <p id="carDetailsNumber"></p>
-        Car Engine No: <p id="carDetailsEngine"></p>
-        Car Chasis No: <p id="carDetailsChasis"></p>
-        Car Color: <p id="carDetailsColor"></p>
-        Car Manufature date: <p id="carDetailsMaufature"></p>
-        Car Make: <p id="carDetailsMake"></p>
-        Car Model: <p id="carDetailsModel"></p>
+      <div class="custom-form">
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="no" [(ngModel)]="no" placeholder="Enter  Car Number" name="no"
+              required=" required">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter name" name="name"
+              required=" required">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="cno" [(ngModel)]="phone" placeholder="Enter Phone Number" name="cno"
+              required=" required">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="date" class="form-control" id="date" name="date" [(ngModel)]="purchaseDate" required=" required">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="address" [(ngModel)]="address" placeholder="Enter address" name="address"
+              required=" required">
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
 
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-secondary ">Submit
+          <fa name="spinner" animation="spin" size="lg" *ngIf="transactionLoader"></fa>
+        </button>
+      </div>
+
+      <div class="form-group text-center padding-1">
+        <p>Already have an account
+          <a style="cursor:pointer" rounterLink="/login">
+            <b>Login</b>
+          </a>
+        </p>
+      </div>
+    </form>
   </div>
-</div> -->
-<!-- Modal content-->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
+  ​
 </div>

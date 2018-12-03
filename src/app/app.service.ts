@@ -1,29 +1,30 @@
-import * as Web3 from 'web3';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from './app.constants';
-declare global {
-    interface Window { web3: any; }
-}
-
-window.web3 = window.web3 || {};
-
+import { map } from 'rxjs/operators';
 @Injectable()
-export class Web3Service {
-    web3: any;
+export class AppService {
+    baseUrl = this.constants.baseUrl;
+    constructor(
+        private constants: ConstantsService,
+        public http: HttpClient,
 
-    constructor(private constants: ConstantsService) {
-        this.web3 = window.web3;
+    ) { }
+
+    getCar() {
+
     }
 
-    getWeb3() {
-        return this.web3;
+    setCar(data) {
+        return this.http.post(`${this.baseUrl}car`, data);
     }
 
-    getAccounts() {
-        return this.web3.eth.getAccounts();
+    setOwner(data) {
+        return this.http.post(`${this.baseUrl}owner`, data);
+
     }
 
-    getContract() {
-        return new this.web3.eth.Contract(this.constants.abi, this.constants.address);
+    getOwner() {
+
     }
 }
