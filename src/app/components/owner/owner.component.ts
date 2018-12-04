@@ -63,29 +63,6 @@ export class OwnerComponent implements OnInit {
     }
   }
 
-  async getD() {
-    console.log(this.getNumber, 'get details')
-    if (this.getNumber) {
-      try {
-        this.accounts = await this.webSerice.getAccounts();
-        var i = 0;
-        while (true) {
-          var owner = await this.contract.methods.getowner(this.getNumber, i).call({
-            from: this.accounts[0]
-          })
-          this.owners.push(owner);
-          console.log(this.owners)
-          i++;
-        }
-      } catch (e) {
-
-      }
-    } else {
-      alert('enter car number to get owners')
-    }
-
-  }
-
 
   web3Installed() {
     let html = '<a  class="link" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn/related?hl=en">Chrome Extension</a>, <a class="link" href="https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/">Mozilla Firefox Extension</a>'
