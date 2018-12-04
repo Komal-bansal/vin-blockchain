@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConstantsService } from './app.constants';
+import { ConstantsService } from '../app.constants';
 import { map } from 'rxjs/operators';
 @Injectable()
 export class AppService {
@@ -26,5 +26,9 @@ export class AppService {
 
     getOwner() {
 
+    }
+
+    getVehicles() {
+        return this.http.get(`${this.baseUrl}vehicle`);
     }
 }

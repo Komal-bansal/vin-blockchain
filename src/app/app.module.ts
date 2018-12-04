@@ -5,23 +5,26 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CarComponent } from './components/car/car.component';
+import { CarViewComponent } from './components/car/view/view.component';
 import { OwnerComponent } from './components/owner/owner.component';
+import { OwnerViewComponent } from './components/owner/view/view.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
-import { Web3Service } from './web3.service';
+import { Web3Service } from './providers/web3.service';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { AuthService } from './providers/auth.service';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ConstantsService } from './app.constants';
 import { ToastrModule } from 'ngx-toastr';
-import { ToastService } from './toast.service';
+import { ToastService } from './providers/toast.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { AppService } from './app.service';
+import { AppService } from './providers/app.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './http.interceptors';
+import { AuthInterceptor } from './providers/http.interceptors';
+import { AuthGuard } from './providers/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,8 @@ import { AuthInterceptor } from './http.interceptors';
     OwnerComponent,
     SidebarComponent,
     HomeComponent,
+    CarViewComponent,
+    OwnerViewComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,12 @@ import { AuthInterceptor } from './http.interceptors';
     AngularFontAwesomeModule,
     HttpClientModule
   ],
-  providers: [Web3Service, AuthService, ConstantsService, ToastService, AppService,
+  providers: [Web3Service,
+    AuthService,
+    ConstantsService,
+    ToastService,
+    AppService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

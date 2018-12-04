@@ -1,45 +1,3 @@
-<!-- <div class="container">
-
-  <form class="form-horizontal" style="background:#6d6e7359;padding: 10px">
-    <div style="text-align: center;
-      font-size: 61px;">OWNER</div>
-    <div class="form-group">
-      <label class="control-label " for="no">Number:</label>
-      <div class="col-sm-12">
-        <input type="text" class="form-control" id="no" [(ngModel)]="no" placeholder="Enter  Car Number" name="no">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label " for="name">Name:</label>
-      <div class="col-sm-12">
-        <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter name" name="name">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label " for="cno">Phone Number:</label>
-      <div class="col-sm-12">
-        <input type="text" class="form-control" id="cno" [(ngModel)]="phone" placeholder="Enter Phone Number" name="cno">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label " for="Color">Purchase Date:</label>
-      <div class="col-sm-12">
-        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="purchaseDate">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label " for="address">Address:</label>
-      <div class="col-sm-12">
-        <input type="text" class="form-control" id="address" [(ngModel)]="address" placeholder="Enter address" name="address">
-      </div>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-secondary " (click)="addOwner()">Submit</button>
-    </div>
-  </form>
-</div>
-
-​ -->
 <div class="main-container vertical-center">
   <div class="container offset-md-3 col-md-6 col-sm-12">
     <form class="form-horizontal" (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
@@ -68,7 +26,8 @@
         </div>
         <div class="form-group">
           <div class="col-sm-12">
-            <input type="date" class="form-control" id="date" name="date" [(ngModel)]="purchaseDate" required=" required">
+            <input type="date" class="form-control" id="date" name="date" [(ngModel)]="purchaseDate" required="required"
+              [max]="getToday()" (keydown)="disableKey($event)">
           </div>
         </div>
         <div class="form-group">
@@ -85,11 +44,8 @@
         </button>
       </div>
 
-      <div class="form-group text-center padding-1">
-        <p>Already have an account
-          <a style="cursor:pointer" rounterLink="/login">
-            <b>Login</b>
-          </a>
+      <div class="form-group text-center padding-1" *ngIf="transactionLoader">
+        <p>Your transaction is being processed. It will take around 15 sec.
         </p>
       </div>
     </form>

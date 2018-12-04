@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as Web3 from 'web3';
-import { Web3Service } from '../../web3.service';
-import { ToastService } from '../../toast.service';
+import { Web3Service } from '../../providers/web3.service';
+import { ToastService } from '../../providers/toast.service';
 import * as alertify from 'alertifyjs';
-import { AppService } from '../../app.service';
+import { AppService } from '../../providers/app.service';
 @Component({
   selector: 'app-owner',
   templateUrl: './owner.component.html',
@@ -22,6 +22,7 @@ export class OwnerComponent implements OnInit {
   owners = [];
   transactionLoader: Boolean;
   metamaskLoggedIn: Boolean;
+  today: any;
   constructor(
     public webSerice: Web3Service,
     public toast: ToastService,
@@ -118,5 +119,16 @@ export class OwnerComponent implements OnInit {
     this.as.setOwner(data).subscribe(res => {
       console.log(res);
     })
+  }
+
+  disableKey = (e: any) => {
+    if (e) {
+      return false;
+    }
+  }
+
+  getToday = () => {
+    this.today = new Date().toISOString().slice(0, 10);
+    return this.today;
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { ConstantsService } from './app.constants';
+import { ConstantsService } from '../app.constants';
 import { map } from 'rxjs/operators';
 @Injectable()
 export class AuthService {

@@ -1,0 +1,55 @@
+<div class="main-container vertical-center">
+    <div class="container offset-md-3 col-md-6 col-sm-12">
+        <form class="form-horizontal" (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
+            <div class="heading">Set owner details</div>
+            <div class="image-container row margin-1">
+                <div class="center"><img src="../../../assets/log- in Pop-up line.png"></div>
+            </div>
+            <div class="custom-form">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="no" [(ngModel)]="no" placeholder="Enter  Car Number"
+                            name="no" required=" required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter name"
+                            name="name" required=" required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="cno" [(ngModel)]="phone" placeholder="Enter Phone Number"
+                            name="cno" required=" required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="purchaseDate"
+                            required=" required">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="address" [(ngModel)]="address" placeholder="Enter address"
+                            name="address" required=" required">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-secondary ">Submit
+                    <fa name="spinner" animation="spin" size="lg" *ngIf="transactionLoader"></fa>
+                </button>
+            </div>
+
+            <div class="form-group text-center padding-1" *ngIf="transactionLoader">
+                <p>Your transaction is being processed. It will take around 15 sec.
+                </p>
+            </div>
+        </form>
+    </div>
+
+    ​
+</div>

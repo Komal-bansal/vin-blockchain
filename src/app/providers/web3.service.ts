@@ -1,6 +1,6 @@
 import * as Web3 from 'web3';
 import { Injectable } from '@angular/core';
-import { ConstantsService } from './app.constants';
+import { ConstantsService } from '../app.constants';
 declare global {
     interface Window { web3: any; }
 }

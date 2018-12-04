@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as Web3 from 'web3';
-import { Web3Service } from '../../web3.service';
-import { ToastService } from '../../toast.service';
+import { Web3Service } from '../../providers/web3.service';
+import { ToastService } from '../../providers/toast.service';
 import * as alertify from 'alertifyjs';
-import { AppService } from '../../app.service';
+import { AppService } from '../../providers/app.service';
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
@@ -13,7 +13,7 @@ export class CarComponent implements OnInit {
   web3;
   contract;
   accounts;
-  carModel = ''; carManufacturer = ' ';
+  carModel = ''; carMake = ' ';
   manufatureDate: any;
   color: string;
   chasisNo: string;
@@ -22,6 +22,10 @@ export class CarComponent implements OnInit {
   getNumber: string;
   metamaskLoggedIn: Boolean;
   transactionLoader: Boolean;
+  vehicles: any;
+  selectedBrand: any;
+  models: any;
+  today: any;
 
   constructor(
     public webSerice: Web3Service,
@@ -33,6 +37,7 @@ export class CarComponent implements OnInit {
 
   ngOnInit() {
     this.contract = this.webSerice.getContract();
+    this.getVehicle();
   }
 
   async addCarDetails() {
@@ -48,7 +53,7 @@ export class CarComponent implements OnInit {
       if (this.metamaskLoggedIn)
         try {
           this.manufatureDate = this.manufatureDate.split('-').reverse().join('');
-          let transaction = await this.contract.methods.setcarD(this.number, this.engineNo, this.chasisNo, this.color, this.manufatureDate, this.carManufacturer, this.carModel).send({
+          let transaction = await this.contract.methods.setcarD(this.number, this.engineNo, this.chasisNo, this.color, this.manufatureDate, this.carMake, this.carModel).send({
             from: this.accounts[0]
           });
           this.saveToDb();
@@ -104,11 +109,37 @@ export class CarComponent implements OnInit {
       chasisNo: this.chasisNo,
       color: this.color,
       ManufactureDate: this.manufatureDate,
-      CarMake: this.carManufacturer,
+      CarMake: this.carMake,
       CarModel: this.carModel
     }
     this.as.setCar(data).subscribe(res => {
+      console.log('set car successfull');
+    })
+  }
+
+  getVehicle() {
+    this.as.getVehicles().subscribe((res: any) => {
+      this.vehicles = res.result;
       console.log(res);
     })
   }
+
+  selectBrand(e) {
+    this.selectedBrand = e;
+    this.models = this.vehicles.filter(vehicle => vehicle.brand == this.selectedBrand);
+    this.models = this.models[0].model;
+  }
+
+  // disable editing date in html on keydown
+  disableKey = (e: any) => {
+    if (e) {
+      return false;
+    }
+  }
+
+  getToday = () => {
+    this.today = new Date().toISOString().slice(0, 10);
+    return this.today;
+  }
+
 }
