@@ -8,15 +8,12 @@ export class AuthInterceptor implements HttpInterceptor {
         // add authorization header with basic auth credentials if available
         let user = JSON.parse(localStorage.getItem('user'));
         let token = localStorage.getItem('token')
-        console.log(token, user, 'in interceptor');
         if (user && token) {
-            console.log('iohioih')
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log('req', request)
         }
 
         return next.handle(request);

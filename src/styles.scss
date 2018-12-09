@@ -1,7 +1,11 @@
 @import 'variables';
 @import '~alertifyjs/build/css/alertify.min.css';
 @import '~alertifyjs/build/css/themes/default.min.css';
-form{
+.form{
+    color: white !important;
+    font-family:monospace;
+}
+.view-container{
     color: white !important;
     font-family:monospace;
 }
@@ -15,13 +19,13 @@ form{
 //     height: 50%;
 // }
 .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    // min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
     min-height: 100vh; /* These two lines are counted as one :-)       */
   
     display: flex;
     align-items: center;
   }
-form {
+.form,.view-container {
     background: #f5af41eb !important;
     padding: 20px 7%;
 }
@@ -88,3 +92,6 @@ input::placeholder {
   }
   
   
+  .main-container{
+      background-attachment: fixed;
+  }

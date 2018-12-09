@@ -1,6 +1,6 @@
-<div class="main-container vertical-center">
+<!-- <div class="main-container vertical-center">
   <div class="container offset-md-3 col-md-6 col-sm-12">
-    <form class="form-horizontal" (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
+    <form class="form-horizontal form" (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
       <div class="heading">Set owner details</div>
       <div class="image-container row margin-1">
         <div class="center"><img src="../../../assets/log- in Pop-up line.png"></div>
@@ -44,6 +44,112 @@
         </button>
       </div>
 
+      <div class="form-group text-center padding-1" *ngIf="transactionLoader">
+        <p>Your transaction is being processed. It will take around 15 sec.
+        </p>
+      </div>
+    </form>
+  </div>
+
+  ​
+</div> -->
+
+<div class="main-container vertical-center">
+  <div class="container offset-md-3 col-md-6 col-sm-12 form">
+    <div class="head row">
+      <span class="fas" [class.fa-chevron-left]="direction==='left'" [class.fa-chevron-right]="direction==='right'"></span>
+      <div class="heading col-sm-7" *ngIf="!search">Add Owner</div>
+      <div class="heading col-sm-7" *ngIf=" search">
+        <fa name="chevron-left" (click)="search=false;"></fa>Owners
+      </div>
+      <div class="heading col-sm-5 search-box">
+        <input type="text" name="search" placeholder="Search.." class=" search" (keydown.enter)="getOwners()"
+          [(ngModel)]="carNo">
+        <a (click)="getOwners()"><img src="../../../assets/searchicon.png" class="img "></a>
+      </div>
+
+    </div>
+    <form class="form-horizontal  " (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
+      <div class="image-container row margin-1">
+        <div class="center"><img src="../../../assets/log- in Pop-up line.png"></div>
+      </div>
+      <div *ngIf="!search" class="setDetails">
+        <div class="custom-form">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="no" [(ngModel)]="no" placeholder="Enter  Car Number" name="no"
+                required=" required">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter name" name="name"
+                required=" required">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="cno" [(ngModel)]="phone" placeholder="Enter Phone Number"
+                name="cno" required=" required">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="date" class="form-control" id="date" name="date" [(ngModel)]="purchaseDate" required="required"
+                [max]="getToday()" (keydown)="disableKey($event)">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="address" [(ngModel)]="address" placeholder="Enter address"
+                name="address" required=" required">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-secondary ">Submit
+            <fa name="spinner" animation="spin" size="lg" *ngIf="transactionLoader"></fa>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="search" class="getDetails">
+        <div class="car" *ngIf="owners">
+
+          <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let owner of owners">
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 label col-xs-4"> Name</div>
+                <div class="col-sm-6 value col-xs-6"> {{owner?.Name}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 label ol-xs-4"> Address</div>
+                <div class="col-sm-6 value"> {{owner?.Address}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 label"> phone</div>
+                <div class="col-sm-6 value"> {{owner?.phone}}</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 label"> Manufacture Purchase Date</div>
+                <div class="col-sm-6 value"> {{owner?.PurchaseDate |date}}</div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-sm-offset-2 col-sm-4 label"> Chasis No</div>
+                <div class="col-sm-6 value"> {{owners?.chasisNo}}</div>
+              </div> -->
+            </ng-template>
+          </ngb-carousel>
+
+
+
+        </div>
+        <div class="getLoader">
+          <fa name="spinner" animation="spin" size="lg" *ngIf="getLoader || owners.length == 0" class="carLoader"></fa>
+
+        </div>
+      </div>
       <div class="form-group text-center padding-1" *ngIf="transactionLoader">
         <p>Your transaction is being processed. It will take around 15 sec.
         </p>

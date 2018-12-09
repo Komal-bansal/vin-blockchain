@@ -4,6 +4,9 @@ import { Web3Service } from '../../providers/web3.service';
 import { ToastService } from '../../providers/toast.service';
 import * as alertify from 'alertifyjs';
 import { AppService } from '../../providers/app.service';
+import * as web3 from 'web3';
+
+
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
@@ -26,7 +29,9 @@ export class CarComponent implements OnInit {
   selectedBrand: any;
   models: any;
   today: any;
-
+  search = false;
+  carNo = '';
+  carDetails: any;
   constructor(
     public webSerice: Web3Service,
     public toast: ToastService,
@@ -57,7 +62,6 @@ export class CarComponent implements OnInit {
             from: this.accounts[0]
           });
           this.saveToDb();
-          console.log(transaction)
           this.transactionLoader = false;
           this.showAlert(transaction.transactionHash);
         }
@@ -69,16 +73,7 @@ export class CarComponent implements OnInit {
   }
 
   async getCarD() {
-    this.accounts = await this.webSerice.getAccounts();
-    console.log(this.accounts[0])
-    if (this.getNumber) {
-      var r = await this.contract.methods.getcar(this.getNumber).call({
-        from: this.accounts[0]
-      });
-      console.log(r);
-    } else {
-      alert('enter car number to get details ');
-    }
+
   }
 
   web3Installed() {
@@ -113,14 +108,12 @@ export class CarComponent implements OnInit {
       CarModel: this.carModel
     }
     this.as.setCar(data).subscribe(res => {
-      console.log('set car successfull');
     })
   }
 
   getVehicle() {
     this.as.getVehicles().subscribe((res: any) => {
       this.vehicles = res.result;
-      console.log(res);
     })
   }
 
@@ -141,5 +134,20 @@ export class CarComponent implements OnInit {
     this.today = new Date().toISOString().slice(0, 10);
     return this.today;
   }
+  getLoader: boolean;
+
+  async getCar() {
+    if (this.carNo) {
+      this.search = true;
+      this.getLoader = true;
+      this.accounts = await this.webSerice.getAccounts();
+      this.carDetails = await this.contract.methods.getcar(this.carNo).call({
+        from: this.accounts[0]
+      });
+      this.getLoader = false;
+    }
+  }
+
+}
 
 }

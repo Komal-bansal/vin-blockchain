@@ -10,17 +10,18 @@ import { ActivatedRoute } from '@angular/router';
     accounts: any;
     contract: any;
     owners = [];
+    loader: Boolean;
     constructor(public web3S: Web3Service, public route: ActivatedRoute) {
 
     }
     ngOnInit() {
         this.contract = this.web3S.getContract();
-        console.log(this.route.snapshot, 'routes')
         this.number = this.route.snapshot.params.id;
         this.getOwners();
     }
 
     async getOwners() {
+        this.loader = true;
         if (this.number) {
             try {
                 this.accounts = await this.web3S.getAccounts();
@@ -30,11 +31,10 @@ import { ActivatedRoute } from '@angular/router';
                         from: this.accounts[0]
                     })
                     this.owners.push(owner);
-                    console.log(this.owners)
                     i++;
                 }
             } catch (e) {
-
+                this.loader = false;
             }
         } else {
             alert('enter car number to get owners')

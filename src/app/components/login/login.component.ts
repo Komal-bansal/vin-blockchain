@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
       this.loader = false;
       this.toast.toastSuccess('Welcome to VINBO', 'Sucessfully logged in')
       localStorage.setItem('user', JSON.stringify(res.result));
-      console.log(res);
       localStorage.setItem('token', res.token)
     }, err => {
       this.loader = false;

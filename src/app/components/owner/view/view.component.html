@@ -1,30 +1,39 @@
 <div class="main-container vertical-center">
     <div class="container offset-md-3 col-md-6 col-sm-12">
-        <form class="form-horizontal" (ngSubmit)="addOwner()" ngNativeValidate #form="ngForm">
-            <div class="heading">Set owner details</div>
+        <div class="view-container">
+            <div class="heading">Get owner details</div>
             <div class="image-container row margin-1">
                 <div class="center"><img src="../../../assets/log- in Pop-up line.png"></div>
             </div>
-            <div *ngFor="let owner of owners">
-                <div class="owner">
-                    <p>Name : {{owner.Name}}</p>
-                    <p>Address : {{owner.Address}}</p>
-                    <p>Phone : {{owner.phone}}</p>
-                    <p>Purchase Date : {{owner.PurchaseDate |date}}</p>
-                </div>
+            <fa name="spinner" animation="spin" size="lg" *ngIf="loader"></fa>
 
-            </div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-secondary ">Submit
-                    <fa name="spinner" animation="spin" size="lg" *ngIf="transactionLoader"></fa>
-                </button>
-            </div>
-
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let owner of owners">
+                    <div class="owner">
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-4 label"> Name:</div>
+                            <div class="col-sm-6 value"> {{owner?.Name}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-4 label"> Address:</div>
+                            <div class="col-sm-6 value"> {{owner?.Address}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-4 label"> Phone:</div>
+                            <div class="col-sm-6 value"> {{owner?.phone}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-4 label"> Purchase Date:</div>
+                            <div class="col-sm-6 value"> {{owner?.PurchaseDate}}</div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
             <div class="form-group text-center padding-1" *ngIf="transactionLoader">
                 <p>Your transaction is being processed. It will take around 15 sec.
                 </p>
             </div>
-        </form>
+        </div>
     </div>
 
     ​

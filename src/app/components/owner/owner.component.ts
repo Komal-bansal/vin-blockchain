@@ -23,6 +23,9 @@ export class OwnerComponent implements OnInit {
   transactionLoader: Boolean;
   metamaskLoggedIn: Boolean;
   today: any;
+  carNo: any;
+  search = false;
+  owners: any;
   constructor(
     public webSerice: Web3Service,
     public toast: ToastService,
@@ -52,7 +55,6 @@ export class OwnerComponent implements OnInit {
             from: this.accounts[0]
           });
           this.saveToDb();
-          console.log(transaction)
           this.transactionLoader = false;
           this.showAlert(transaction.transactionHash);
         }
@@ -94,7 +96,6 @@ export class OwnerComponent implements OnInit {
       PurchaseDate: this.purchaseDate
     }
     this.as.setOwner(data).subscribe(res => {
-      console.log(res);
     })
   }
 
@@ -108,4 +109,27 @@ export class OwnerComponent implements OnInit {
     this.today = new Date().toISOString().slice(0, 10);
     return this.today;
   }
+  getLoader = false;
+  async getOwners() {
+    if (this.carNo) {
+      this.search = true;
+      this.getLoader = true;
+      try {
+        this.accounts = await this.webSerice.getAccounts();
+        let i = 0;
+        while (true) {
+          var owner = await this.contract.methods.getowner(this.carNo, i).call({
+            from: this.accounts[0]
+          })
+          this.getLoader = false;
+          this.owners.push(owner);
+          i++;
+        }
+      } catch (e) {
+        this.getLoader = false
+      }
+    }
+  }
+
+
 }

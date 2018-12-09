@@ -1,65 +1,108 @@
 <div class="main-container vertical-center">
-  <div class="container offset-md-3 col-md-6 col-sm-12">
-    <form class="form-horizontal" (ngSubmit)="addCarDetails()" ngNativeValidate #form="ngForm">
-      <div class="heading">Set car details</div>
+  <div class="container offset-md-3 col-md-6 col-sm-12 form">
+    <div class="head row">
+      <span class="fas" [class.fa-chevron-left]="direction==='left'" [class.fa-chevron-right]="direction==='right'"></span>
+      <div class="heading col-sm-6" *ngIf="!search">Add Car</div>
+      <div class="heading " *ngIf=" search">
+        <fa name="chevron-left" (click)="search=false;"></fa>Get Car
+      </div>
+      <div class="heading col-sm-6 search-box">
+        <input type="text" name="search" placeholder="Search.." class=" search" (keydown.enter)="getCar()" [(ngModel)]="carNo">
+        <a (click)="getCar()"><img src="../../../assets/searchicon.png" class="img "></a>
+      </div>
+
+    </div>
+    <form class="form-horizontal  " (ngSubmit)="addCarDetails()" ngNativeValidate #form="ngForm">
       <div class="image-container row margin-1">
         <div class="center"><img src="../../../assets/log- in Pop-up line.png"></div>
       </div>
-      <div class="custom-form">
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control" [(ngModel)]="number" id="no" placeholder="Enter  Car Number"
-              required=" required" name="no">
+      <div *ngIf="!search" class="setDetails">
+        <div class="custom-form">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" [(ngModel)]="number" id="no" placeholder="Enter  Car Number"
+                required=" required" name="no">
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control" [(ngModel)]="engineNo" id="eno" placeholder="Enter Engine Number"
-              required name="eno">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" [(ngModel)]="engineNo" id="eno" placeholder="Enter Engine Number"
+                required name="eno">
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control" [(ngModel)]="chasisNo" id="cno" placeholder="Enter Chasis Number"
-              required name="cno">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" [(ngModel)]="chasisNo" id="cno" placeholder="Enter Chasis Number"
+                required name="cno">
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="text" class="form-control" [(ngModel)]="color" id="Color" placeholder="Enter Color" required
-              name="Color">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" [(ngModel)]="color" id="Color" placeholder="Enter Color" required
+                name="Color">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="date" class="form-control" [(ngModel)]="manufatureDate" id="mdate" placeholder="Enter Manufature Date"
+                required required name="mdate" [max]="getToday()" (keydown)="disableKey($event)">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <select class="form-control" required="required" [(ngModel)]="carMake" id="carMake" name="carMake"
+                (ngModelChange)="selectBrand($event)" name="carMake">
+                <option disabled value="" selected>Select Car Brand</option>
+                <option *ngFor="let vehicle of vehicles">{{vehicle?.brand}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <select class="form-control" required="required" [(ngModel)]="carModel" id="carModel" name="carMake">
+                <option disabled value="" selected>Select Car Model</option>
+                <option *ngFor="let m of models">{{m}}</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="col-sm-12">
-            <input type="date" class="form-control" [(ngModel)]="manufatureDate" id="mdate" placeholder="Enter Manufature Date"
-              required required name="mdate" [max]="getToday()" (keydown)="disableKey($event)">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <select class="form-control" required="required" [(ngModel)]="carMake" id="carMake" name="carMake"
-              (ngModelChange)="selectBrand($event)" name="carMake">
-              <option disabled value="" selected>Select Car Brand</option>
-              <option *ngFor="let vehicle of vehicles">{{vehicle?.brand}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <select class="form-control" required="required" [(ngModel)]="carModel" id="carModel" name="carMake">
-              <option disabled value="" selected>Select Car Model</option>
-              <option *ngFor="let m of models">{{m}}</option>
-            </select>
-          </div>
+        <div class="form-group text-center">
+          <button type="submit" class="btn btn-secondary ">Submit
+            <fa name="spinner" animation="spin" size="lg" *ngIf="transactionLoader"></fa>
+          </button>
         </div>
       </div>
 
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-secondary ">Submit
-          <fa name="spinner" animation="spin" size="lg" *ngIf="transactionLoader"></fa>
-        </button>
+      <div *ngIf="search" class="getDetails">
+        <div class="car" *ngIf="carDetails">
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 label col-xs-4"> CarMake</div>
+            <div class="col-sm-6 value col-xs-6"> {{carDetails?.CarMake}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 label ol-xs-4"> Car Model</div>
+            <div class="col-sm-6 value"> {{carDetails?.CarModel}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 label"> Color</div>
+            <div class="col-sm-6 value"> {{carDetails?.color}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 label"> Manufacture Date</div>
+            <div class="col-sm-6 value"> {{carDetails?.ManufactureDate |date}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 label"> Chasis No</div>
+            <div class="col-sm-6 value"> {{carDetails?.chasisNo}}</div>
+          </div>
+
+        </div>
+        <div class="getLoader">
+          <fa name="spinner" animation="spin" size="lg" *ngIf="getLoader" class="carLoader"></fa>
+
+        </div>
       </div>
       <div class="form-group text-center padding-1" *ngIf="transactionLoader">
         <p>Your transaction is being processed. It will take around 15 sec.
@@ -68,5 +111,5 @@
     </form>
   </div>
 
-  ​
+
 </div>

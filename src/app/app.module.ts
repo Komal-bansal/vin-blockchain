@@ -25,6 +25,8 @@ import { AppService } from './providers/app.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './providers/http.interceptors';
 import { AuthGuard } from './providers/auth.guard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { AuthGuard } from './providers/auth.guard';
     RouterModule,
     ToastrModule.forRoot(),
     AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [Web3Service,
     AuthService,

@@ -6,10 +6,18 @@
 .owner{
     background: #f6b959;
     padding: 1px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
+    padding: 10px !important
 }
 
-.owner p {
-    margin: 8px;
+.label{
+    color:whitesmoke;
+    font-size: 20px;
+    margin-left: 30px
+}
+
+.value{
+    color: white;
+    font-size: 20px
 }
 
