@@ -4,10 +4,11 @@
       <span class="fas" [class.fa-chevron-left]="direction==='left'" [class.fa-chevron-right]="direction==='right'"></span>
       <div class="heading col-sm-6" *ngIf="!search">Add Car</div>
       <div class="heading " *ngIf=" search">
-        <fa name="chevron-left" (click)="search=false;"></fa>Get Car
+        <fa name="chevron-left" (click)="search=false;"></fa>Car
       </div>
       <div class="heading col-sm-6 search-box">
-        <input type="text" name="search" placeholder="Search.." class=" search" (keydown.enter)="getCar()" [(ngModel)]="carNo">
+        <input type="text" name="search" placeholder="Car Number" class=" search" (keydown.enter)="getCar()"
+          [(ngModel)]="carNo">
         <a (click)="getCar()"><img src="../../../assets/searchicon.png" class="img "></a>
       </div>
 
@@ -76,7 +77,10 @@
       </div>
 
       <div *ngIf="search" class="getDetails">
-        <div class="car" *ngIf="carDetails">
+        <div *ngIf="!carDetails || carDetails.ManufactureDate == '0'">
+          <h2>OOPS!! Car Not found</h2>
+        </div>
+        <div class="car" *ngIf="carDetails && carDetails.ManufactureDate != '0'">
           <div class="row">
             <div class="col-sm-offset-2 col-sm-4 label col-xs-4"> CarMake</div>
             <div class="col-sm-6 value col-xs-6"> {{carDetails?.CarMake}}</div>

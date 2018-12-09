@@ -140,10 +140,12 @@ export class CarComponent implements OnInit {
     if (this.carNo) {
       this.search = true;
       this.getLoader = true;
+      this.carDetails = null;
       this.accounts = await this.webSerice.getAccounts();
       this.carDetails = await this.contract.methods.getcar(this.carNo).call({
         from: this.accounts[0]
       });
+      console.log(this.carDetails)
       this.getLoader = false;
     }
   }

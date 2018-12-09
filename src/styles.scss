@@ -4,24 +4,16 @@
 .form{
     color: white !important;
     font-family:monospace;
+    margin-top:70px;
+    // padding-top: 60px;
 }
 .view-container{
     color: white !important;
     font-family:monospace;
 }
 
-// .container{
-//     position: absolute;
-//     top: 43%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     width: 40%;
-//     height: 50%;
-// }
 .vertical-center {
-    // min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
     min-height: 100vh; /* These two lines are counted as one :-)       */
-  
     display: flex;
     align-items: center;
   }
@@ -95,3 +87,4 @@ input::placeholder {
   .main-container{
       background-attachment: fixed;
   }
+

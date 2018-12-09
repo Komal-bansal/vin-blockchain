@@ -25,7 +25,7 @@ export class OwnerComponent implements OnInit {
   today: any;
   carNo: any;
   search = false;
-  owners: any;
+  ownerCount: any;
   constructor(
     public webSerice: Web3Service,
     public toast: ToastService,
@@ -111,22 +111,26 @@ export class OwnerComponent implements OnInit {
   }
   getLoader = false;
   async getOwners() {
+    this.owners = [];
     if (this.carNo) {
       this.search = true;
       this.getLoader = true;
       try {
         this.accounts = await this.webSerice.getAccounts();
-        let i = 0;
+        this.ownerCount = 0;
         while (true) {
-          var owner = await this.contract.methods.getowner(this.carNo, i).call({
+          console.log(this.ownerCount, this.carNo)
+          var owner = await this.contract.methods.getowner(this.carNo, this.ownerCount).call({
             from: this.accounts[0]
-          })
+          });
+          console.log(this.owner)
           this.getLoader = false;
           this.owners.push(owner);
-          i++;
+          this.ownerCount++;
         }
       } catch (e) {
-        this.getLoader = false
+        this.getLoader = false;
+        console.log('error occured', e);
       }
     }
   }
