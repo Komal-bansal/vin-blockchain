@@ -150,6 +150,9 @@ export class CarComponent implements OnInit {
     }
   }
 
-}
+  customDate(date) {
+    return date.slice(0, date.length - 6) + '/' + date.slice(date.length - 6, date.length - 4) + '/' + date.slice(date.length - 4);
+  }
 
 }
+

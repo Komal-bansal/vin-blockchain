@@ -123,7 +123,6 @@ export class OwnerComponent implements OnInit {
           var owner = await this.contract.methods.getowner(this.carNo, this.ownerCount).call({
             from: this.accounts[0]
           });
-          console.log(this.owner)
           this.getLoader = false;
           this.owners.push(owner);
           this.ownerCount++;
@@ -135,5 +134,8 @@ export class OwnerComponent implements OnInit {
     }
   }
 
+  customDate(date) {
+    return date.slice(0, date.length - 6) + '/' + date.slice(date.length - 6, date.length - 4) + '/' + date.slice(date.length - 4);
+  }
 
 }

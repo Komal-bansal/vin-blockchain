@@ -1,4 +1,4 @@
-<nav class="navbar  navbar-expand-sm navbar-light bg-light custom-nav">
+<!-- <nav class="navbar  navbar-expand-sm navbar-light bg-light custom-nav">
     <a class="navbar-brand">
         <img src="../../../assets/Logo.png" class="brand">
     </a>
@@ -10,6 +10,41 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="nav navbar-nav" style="float: right">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/home" routerLinkActive="active">Home | </a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">Login | </a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                <a class="nav-link" routerLink="/register" routerLinkActive="active">Register | </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/car" *ngIf="authService.isLoggedIn()" routerLinkActive="active">Car |
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/owner" *ngIf="authService.isLoggedIn()" routerLinkActive="active">Owner
+                    | </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav> -->
+<nav class="navbar navbar-expand-md navbar-dark bg-primary  custom-nav">
+    <a class="navbar-brand">
+        <img src="../../../assets/Logo.png" class="brand">
+    </a>
+    <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
+        data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+        <ul class="navbar-nav mr-auto"></ul>
+
+        <ul class="nav navbar-nav" style="float: right">
             <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="/home" routerLinkActive="active">Home | </a>
             </li> -->
@@ -20,7 +55,8 @@
                 <a class="nav-link" routerLink="/register" routerLinkActive="active">Register | </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/car" *ngIf="authService.isLoggedIn()" routerLinkActive="active">Car |
+                <a class="nav-link" routerLink="/car" *ngIf="authService.isLoggedIn()" routerLinkActive="active">Car
+                    |
                 </a>
             </li>
             <li class="nav-item">
